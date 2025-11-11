@@ -1,26 +1,12 @@
-// index.tsx — Canvas Preview Single-File (fixes Missing semicolon at line 17)
-// This file consolidates the UI into ONE React file so the canvas runner can parse it.
-// It mirrors the Next.js multi-file UI but avoids ESM tooling differences.
-// Semicolons are added consistently to prevent ASI edge-cases.
+// index.js — Creator Challenge Network Frontend
+// Vollständige React + Next.js Oberfläche (Designansicht)
 
 import React, { useMemo, useState } from 'react';
 
 // ----------------------------
-// Types
+// Utils
 // ----------------------------
-type Role = 'fan' | 'premium' | 'creator';
-interface Profile { id: string; name: string; avatar: string; role: Role; points: number; premium: boolean; fanClubs: string[]; }
-interface Challenge {
-  id: string; title: string; cover: string; creatorId: string; rewardPoints: number; rewardLabel: string;
-  status: 'open' | 'closed'; opensAt: string; deadline: string; premiumOnly: boolean; fanClubOnly: boolean; votes: number;
-}
-interface Idea { id: string; title: string; author: string; votes: number; }
-interface RewardItem { id: string; title: string; cost: number; }
-
-// ----------------------------
-// Utils (no external deps)
-// ----------------------------
-function timeLeft(deadlineISO: string): string {
+function timeLeft(deadlineISO) {
   const d = new Date(deadlineISO).getTime();
   const diff = Math.floor((d - Date.now()) / 1000);
   if (diff <= 0) return 'abgelaufen';
@@ -29,7 +15,7 @@ function timeLeft(deadlineISO: string): string {
   return `${h}h ${m}m`;
 }
 
-function isOpenForUser(opensAtISO: string, premium: boolean): boolean {
+function isOpenForUser(opensAtISO, premium) {
   const open = new Date(opensAtISO).getTime();
   const now = Date.now();
   if (open <= now) return true;
@@ -38,81 +24,83 @@ function isOpenForUser(opensAtISO: string, premium: boolean): boolean {
 }
 
 // ----------------------------
-// Mock Data
+// Mock-Daten
 // ----------------------------
-const currentUser: Profile = {
-  id: 'me', name: 'You', avatar: 'https://i.pravatar.cc/100?img=12', role: 'fan', points: 840, premium: true, fanClubs: ['creator-1']
+const currentUser = {
+  id: 'me',
+  name: 'You',
+  avatar: 'https://i.pravatar.cc/100?img=12',
+  role: 'fan',
+  points: 840,
+  premium: true,
+  fanClubs: ['creator-1']
 };
 
-const creators: Profile[] = [
-  { id: 'creator-1', name: 'NovaPixel', avatar: 'https://i.pravatar.cc/100?img=32', role: 'creator', points: 0, premium: false, fanClubs: [] },
-  { id: 'creator-2', name: 'BeatSmith', avatar: 'https://i.pravatar.cc/100?img=5', role: 'creator', points: 0, premium: false, fanClubs: [] }
+const creators = [
+  { id: 'creator-1', name: 'NovaPixel', avatar: 'https://i.pravatar.cc/100?img=32' },
+  { id: 'creator-2', name: 'BeatSmith', avatar: 'https://i.pravatar.cc/100?img=5' }
 ];
 
-const challengesSeed: Challenge[] = [
+const challengesSeed = [
   {
-    id: 'ch-1', title: 'Make a 10s Looping Synth Riff',
+    id: 'ch-1',
+    title: 'Make a 10s Looping Synth Riff',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop',
-    creatorId: 'creator-2', rewardPoints: 300, rewardLabel: 'Shoutout + Sample Pack', status: 'open',
+    creatorId: 'creator-2',
+    rewardPoints: 300,
+    rewardLabel: 'Shoutout + Sample Pack',
+    status: 'open',
     opensAt: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
     deadline: new Date(Date.now() + 2 * 24 * 3600 * 1000).toISOString(),
-    premiumOnly: false, fanClubOnly: false, votes: 321
+    premiumOnly: false,
+    fanClubOnly: false,
+    votes: 321
   },
   {
-    id: 'ch-2', title: 'Thumbnail Redesign for Sci-Fi Video',
+    id: 'ch-2',
+    title: 'Thumbnail Redesign for Sci-Fi Video',
     cover: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1200&auto=format&fit=crop',
-    creatorId: 'creator-1', rewardPoints: 600, rewardLabel: 'Merch Bundle', status: 'open',
-    opensAt: new Date(Date.now() + 9 * 3600 * 1000).toISOString(), // opens in 9h (premium early ok)
+    creatorId: 'creator-1',
+    rewardPoints: 600,
+    rewardLabel: 'Merch Bundle',
+    status: 'open',
+    opensAt: new Date(Date.now() + 9 * 3600 * 1000).toISOString(),
     deadline: new Date(Date.now() + 3 * 24 * 3600 * 1000).toISOString(),
-    premiumOnly: true, fanClubOnly: false, votes: 88
+    premiumOnly: true,
+    fanClubOnly: false,
+    votes: 88
   },
   {
-    id: 'ch-3', title: 'Design a Logo Variation',
+    id: 'ch-3',
+    title: 'Design a Logo Variation',
     cover: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1200&auto=format&fit=crop',
-    creatorId: 'creator-1', rewardPoints: 200, rewardLabel: 'Discord Role + Shoutout', status: 'closed',
+    creatorId: 'creator-1',
+    rewardPoints: 200,
+    rewardLabel: 'Discord Role + Shoutout',
+    status: 'closed',
     opensAt: new Date(Date.now() - 3 * 24 * 3600 * 1000).toISOString(),
     deadline: new Date(Date.now() - 1 * 24 * 3600 * 1000).toISOString(),
-    premiumOnly: false, fanClubOnly: true, votes: 712
+    premiumOnly: false,
+    fanClubOnly: true,
+    votes: 712
   }
 ];
 
-const ideasSeed: Idea[] = [
+const ideasSeed = [
   { id: 'idea-1', title: 'VR Reactions to fan builds', author: 'You', votes: 41 },
   { id: 'idea-2', title: '24h Stream Challenge with polls', author: 'NovaPixel', votes: 64 }
 ];
 
-const rewardsSeed: RewardItem[] = [
+const rewardsSeed = [
   { id: 'rw-1', title: 'Creator Shoutout', cost: 200 },
   { id: 'rw-2', title: 'Exclusive Wallpaper Pack', cost: 350 },
   { id: 'rw-3', title: 'Signed Digital Poster', cost: 600 }
 ];
 
 // ----------------------------
-// Tiny test harness (console assertions)
+// Komponenten
 // ----------------------------
-(function runTests(): void {
-  // timeLeft future format
-  const future = new Date(Date.now() + (2 * 3600 + 15 * 60) * 1000).toISOString();
-  const tl = timeLeft(future);
-  console.assert(/\d+h \d+m/.test(tl), 'timeLeft() should format as "Hh Mm"');
-
-  // timeLeft past
-  const past = new Date(Date.now() - 3600 * 1000).toISOString();
-  console.assert(timeLeft(past) === 'abgelaufen', 'timeLeft() should return abgelaufen for past deadlines');
-
-  // isOpenForUser gating
-  const openIn24h = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
-  console.assert(isOpenForUser(openIn24h, true) === false, 'Premium should NOT see when >12h away');
-  const openIn6h = new Date(Date.now() + 6 * 3600 * 1000).toISOString();
-  console.assert(isOpenForUser(openIn6h, true) === true, 'Premium should see within 12h of open');
-  const alreadyOpen = new Date(Date.now() - 1 * 3600 * 1000).toISOString();
-  console.assert(isOpenForUser(alreadyOpen, false) === true, 'Everyone should see when already open');
-})();
-
-// ----------------------------
-// UI components (no external libs; Tailwind classes left as plain className)
-// ----------------------------
-function Card({ children }: { children: React.ReactNode; }) {
+function Card({ children }) {
   return (
     <div style={{ borderRadius: 16, border: '1px solid rgba(255,255,255,.1)', background: 'rgba(255,255,255,.06)', padding: 16, marginBottom: 12 }}>
       {children}
@@ -120,8 +108,8 @@ function Card({ children }: { children: React.ReactNode; }) {
   );
 }
 
-function ChallengeCard({ c }: { c: Challenge; }) {
-  const creator = creators.find(x => x.id === c.creatorId)!;
+function ChallengeCard({ c }) {
+  const creator = creators.find(x => x.id === c.creatorId);
   const open = isOpenForUser(c.opensAt, currentUser.premium);
   const gated = (!open) || (c.fanClubOnly && !currentUser.fanClubs.includes(c.creatorId));
   return (
@@ -163,7 +151,7 @@ function ChallengeCard({ c }: { c: Challenge; }) {
   );
 }
 
-function IdeaBox({ ideas }: { ideas: Idea[]; }) {
+function IdeaBox({ ideas }) {
   return (
     <Card>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -185,7 +173,7 @@ function IdeaBox({ ideas }: { ideas: Idea[]; }) {
   );
 }
 
-function Rewards({ items }: { items: RewardItem[]; }) {
+function Rewards({ items }) {
   const [open, setOpen] = useState(false);
   return (
     <Card>
@@ -224,7 +212,7 @@ function Rewards({ items }: { items: RewardItem[]; }) {
 // ----------------------------
 // App
 // ----------------------------
-export default function App(): JSX.Element {
+export default function App() {
   const challenges = useMemo(() => challengesSeed, []);
   const ideas = useMemo(() => ideasSeed, []);
   const rewards = useMemo(() => rewardsSeed, []);
@@ -251,17 +239,4 @@ export default function App(): JSX.Element {
       <IdeaBox ideas={ideas} />
       <Rewards items={rewards} />
 
-      <footer style={{ borderTop: '1px solid rgba(255,255,255,.1)', padding: 16, textAlign: 'center', fontSize: 12, opacity: .6 }}>
-        © {new Date().getFullYear()} Creator Challenge Network
-      </footer>
-    </div>
-  );
-}
-
-// ----------------------------
-// Notes for full Next.js project (not executed in canvas):
-// - Ensure `next.config.mjs` ends with a semicolon: `export default nextConfig;`.
-// - Keep imports at top of files; avoid using identifiers before import.
-// - When moving this single-file into the multi-file project, you can split it back
-//   into the provided directories from the earlier version.
-// ----------------------------
+      <footer style={{ borderTop: '1px
