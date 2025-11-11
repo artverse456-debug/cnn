@@ -239,4 +239,10 @@ export default function App() {
       <IdeaBox ideas={ideas} />
       <Rewards items={rewards} />
 
-      <footer style={{ borderTop: '1px
+            <footer style={{ borderTop: '1px solid rgba(255,255,255,.1)', padding: 16, textAlign: 'center', fontSize: 12, opacity: .6 }}>
+        © {new Date().getFullYear()} Creator Challenge Network
+      </footer>
+    </div>
+  );
+}
+
