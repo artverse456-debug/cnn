@@ -92,6 +92,12 @@ const challengesSeed = [
     votes: 712
   }
 ];
+const signIn = async () => {
+  await supabase.auth.signInWithOAuth({ provider: 'google' });
+};
+const signOut = async () => {
+  await supabase.auth.signOut();
+};
 
 const ideasSeed = [
   { id: 'idea-1', title: 'VR Reactions to fan builds', author: 'You', votes: 41 },
