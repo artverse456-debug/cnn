@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
-
+import { useEffect, useState } from 'react';
 
 
 export const supabase = createClient(
@@ -229,7 +229,16 @@ function Rewards({ items }) {
 // App
 // ----------------------------
 export default function App() {
-  const challenges = useMemo(() => challengesSeed, []);
+  const [challenges, setChallenges] = useState([]);
+
+useEffect(() => {
+  async function loadChallenges() {
+    const { data, error } = await supabase.from('challenges').select('*');
+    if (!error) setChallenges(data);
+  }
+  loadChallenges();
+}, []);
+
   const ideas = useMemo(() => ideasSeed, []);
   const rewards = useMemo(() => rewardsSeed, []);
   return (
