@@ -94,16 +94,21 @@ export default function SignupPage() {
               type="email"
               required
               placeholder="du@example.com"
-              style={{
-                width: '100%',
-                borderRadius: 999,
-                border: '1px solid rgba(148,163,184,0.7)',
-                padding: '9px 14px',
-                background: 'rgba(15,23,42,0.95)',
-                color: 'white',
-                fontSize: 14,
-                outline: 'none'
-              }}
+            style={{
+  width: '100%',
+  height: 46,
+  borderRadius: 12,
+  border: '1px solid rgba(148,163,184,0.45)',
+  padding: '0 14px',
+  background: 'rgba(15,23,42,0.92)',
+  color: 'white',
+  fontSize: 14,
+  outline: 'none',
+  transition: '0.2s border-color',
+}}
+onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
+onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
+
             />
           </div>
 
