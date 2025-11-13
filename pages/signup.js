@@ -70,7 +70,8 @@ export default function SignupPage() {
               required
               placeholder="z.B. NovaPixel"
               style={{
-                width: '100%',
+               width: 'calc(100% - 8px)',
+
                 borderRadius: 999,
                 border: '1px solid rgba(148,163,184,0.7)',
                 padding: '9px 14px',
