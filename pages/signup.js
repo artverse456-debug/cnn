@@ -96,7 +96,8 @@ export default function SignupPage() {
               required
               placeholder="du@example.com"
             style={{
-  width: '100%',
+ width: 'calc(100% - 8px)',
+
   height: 42,
   borderRadius: 12,
   border: '1px solid rgba(148,163,184,0.45)',
@@ -126,7 +127,8 @@ onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
               required
               placeholder="••••••••"
               style={{
-                width: '100%',
+                width: 'calc(100% - 8px)',
+
                 borderRadius: 999,
                 border: '1px solid rgba(148,163,184,0.7)',
                 padding: '9px 14px',
