@@ -56,94 +56,94 @@ export default function LoginPage() {
         </div>
 
         {/* Formular */}
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
-          <div>
-          <div style={{ paddingRight: 8 }}>
-  <label
-    htmlFor="email"
-    style={{ display: 'block', fontSize: 13, marginBottom: 4 }}
-  >
-    E-Mail
-  </label>
+       <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
 
-  <input
-    id="email"
-    type="email"
-    required
-    placeholder="du@example.com"
+  {/* EMAIL */}
+  <div style={{ paddingRight: 8 }}>
+    <label
+      htmlFor="email"
+      style={{ display: 'block', fontSize: 13, marginBottom: 4 }}
+    >
+      E-Mail
+    </label>
+
+    <input
+      id="email"
+      type="email"
+      required
+      placeholder="du@example.com"
+      style={{
+        width: '90%',
+        height: 46,
+        borderRadius: 12,
+        border: '1px solid rgba(148,163,184,0.45)',
+        padding: '0 14px',
+        background: 'rgba(15,23,42,0.92)',
+        color: 'white',
+        fontSize: 14,
+        outline: 'none',
+        boxSizing: 'border-box'
+      }}
+      onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
+      onBlur={(e) =>
+        (e.target.style.borderColor = 'rgba(148,163,184,0.45)')
+      }
+    />
+  </div>
+
+  {/* PASSWORT */}
+  <div style={{ paddingRight: 8 }}>
+    <label
+      htmlFor="password"
+      style={{ display: 'block', fontSize: 13, marginBottom: 4 }}
+    >
+      Passwort
+    </label>
+
+    <input
+      id="password"
+      type="password"
+      required
+      placeholder="••••••••"
+      style={{
+        width: '90%',
+        height: 46,
+        borderRadius: 12,
+        border: '1px solid rgba(148,163,184,0.45)',
+        padding: '0 14px',
+        background: 'rgba(15,23,42,0.92)',
+        color: 'white',
+        fontSize: 14,
+        outline: 'none',
+        boxSizing: 'border-box',
+        transition: '0.2s border-color'
+      }}
+      onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
+      onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
+    />
+  </div>
+
+  {/* BUTTON */}
+  <button
+    type="submit"
     style={{
-      width: '90%',
-      height: 46,
-      borderRadius: 12,
-      border: '1px solid rgba(148,163,184,0.45)',
-      padding: '0 14px',
-      background: 'rgba(15,23,42,0.92)',
+      marginTop: 6,
+      width: '100%',
+      borderRadius: 999,
+      border: 'none',
+      padding: '10px 16px',
+      background: 'linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899)',
       color: 'white',
-      fontSize: 14,
-      outline: 'none',
-      boxSizing: 'border-box'
+      fontWeight: 600,
+      fontSize: 15,
+      cursor: 'pointer'
     }}
-    onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
-    onBlur={(e) =>
-      (e.target.style.borderColor = 'rgba(148,163,184,0.45)')
-    }
-  />
-</div>
+  >
+    Einloggen
+  </button>
 
+</form>
 
-          <div>
-            <label
-              htmlFor="password"
-              style={{ display: 'block', fontSize: 13, marginBottom: 4 }}
-            >
-              Passwort
-            </label>
-            <input
-              id="password"
-              type="password"
-              required
-              placeholder="••••••••"
-              style={{
-width: '90%',
-margin: '0 auto'
-
-
-  height: 46,
-  borderRadius: 12,
-  border: '1px solid rgba(148,163,184,0.45)',
-  padding: '0 14px',
-  background: 'rgba(15,23,42,0.92)',
-  color: 'white',
-  fontSize: 14,
-  outline: 'none',
-  transition: '0.2s border-color',
-}}
-onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
-onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
-
-}
-            />
-          </div>
-
-          <button
-            type="submit"
-            style={{
-              marginTop: 6,
-              width: '100%',
-              borderRadius: 999,
-              border: 'none',
-              padding: '10px 16px',
-              background:
-                'linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899)',
-              color: 'white',
-              fontWeight: 600,
-              fontSize: 15,
-              cursor: 'pointer'
-            }}
-          >
-            Einloggen
-          </button>
-        </form>
 
         {/* Links unten */}
         <div
