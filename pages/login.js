@@ -106,6 +106,9 @@ export default function LoginPage() {
   outline: 'none',
   transition: '0.2s border-color',
 }}
+onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
+onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
+
 
             />
           </div>
