@@ -127,7 +127,7 @@ onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
               required
               placeholder="••••••••"
               style={{
-                width: 'calc(100% - 8px)',
+                width: 'calc(100% - 35px)',
 
                 borderRadius: 999,
                 border: '1px solid rgba(148,163,184,0.7)',
