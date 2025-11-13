@@ -96,7 +96,7 @@ export default function SignupPage() {
               required
               placeholder="du@example.com"
             style={{
- width: 'calc(100% - 8px)',
+ width: 'calc(100% - 35px)',
 
   height: 42,
   borderRadius: 12,
