@@ -2,9 +2,9 @@
 // Vollständige React + Next.js Oberfläche (Designansicht)
 
 import React, { useMemo, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+
 import { supabase } from '../lib/supabaseClient';
-import { useEffect, useState } from 'react';
+
 
 
 
