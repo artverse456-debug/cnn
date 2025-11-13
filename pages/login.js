@@ -55,8 +55,10 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Formular */}
-       <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
+{/* Formular */}
+<div>
+  <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
+
 
   {/* EMAIL */}
   <div style={{ paddingRight: 8 }}>
