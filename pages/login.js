@@ -70,9 +70,7 @@ export default function LoginPage() {
               required
               placeholder="du@example.com"
               style={{
-               width: 'calc(100% - 8px)',
-
-
+               width: 'calc(100% - 30px)',
                borderRadius: 999,
                 border: '1px solid rgba(148,163,184,0.7)',
                 padding: '9px 14px',
