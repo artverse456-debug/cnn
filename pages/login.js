@@ -102,7 +102,7 @@ export default function LoginPage() {
               required
               placeholder="••••••••"
               style={{
-width: '90%',
+width: '50%',
 margin: '0 auto'
 
 
