@@ -58,6 +58,7 @@ export default function LoginPage() {
         {/* Formular */}
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
           <div>
+          <div style={{ paddingRight: 8 }}
             <label
               htmlFor="email"
               style={{ display: 'block', fontSize: 13, marginBottom: 4 }}
@@ -70,7 +71,7 @@ export default function LoginPage() {
   required
   placeholder="du@example.com"
   style={{
-    width: '50%',
+    width: '100%',
     boxSizing: 'border-box',
     height: 46,
     borderRadius: 12,
@@ -118,7 +119,7 @@ margin: '0 auto'
 onFocus={(e) => (e.target.style.borderColor = '#60a5fa')}
 onBlur={(e) => (e.target.style.borderColor = 'rgba(148,163,184,0.45)')}
 
-
+}
             />
           </div>
 
