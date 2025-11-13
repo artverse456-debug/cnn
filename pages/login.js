@@ -71,7 +71,7 @@ export default function LoginPage() {
               placeholder="du@example.com"
               style={{
                width: '90%',
-margin: '0 auto'
+               margin: '0 auto'
 
                borderRadius: 999,
                 border: '1px solid rgba(148,163,184,0.7)',
