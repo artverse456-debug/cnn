@@ -1,9 +1,9 @@
 // index.js — Creator Challenge Network Frontend
 // Vollständige React + Next.js Oberfläche (Designansicht)
 
-import React, { useMemo, useState } from 'react';
-
+import React, { useMemo, useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
+
 
 
 
