@@ -95,7 +95,9 @@ export default function LoginPage() {
               required
               placeholder="••••••••"
               style={{
- width: 'calc(100% - 50px)',
+width: '90%',
+margin: '0 auto'
+
 
   height: 46,
   borderRadius: 12,
