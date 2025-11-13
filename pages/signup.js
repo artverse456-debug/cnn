@@ -99,7 +99,7 @@ export default function SignupPage() {
   height: 42,
   borderRadius: 12,
   border: '1px solid rgba(148,163,184,0.45)',
-  padding: '50px 14px',
+  padding: '8px 50px',
   background: 'rgba(15,23,42,0.92)',
   color: 'white',
   fontSize: 14,
