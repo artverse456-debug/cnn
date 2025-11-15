@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-[#07050f] text-white min-h-screen;
+}
+
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(120deg, #6e41ff, #ff6ec7, #00f5d4);
+  z-index: -2;
+  border-radius: inherit;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #0b0915;
+  z-index: -1;
+}
+
+.card-glow {
+  box-shadow: 0 15px 45px rgba(110, 65, 255, 0.25);
+}
